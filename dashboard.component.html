@@ -1,0 +1,31 @@
+<!-- src/app/pages/dashboard/dashboard.component.html -->
+
+<mat-toolbar color="primary">
+  <span>Digital Wallet</span>
+  <span class="spacer"></span>
+  <button mat-button (click)="logout()">Logout</button>
+</mat-toolbar>
+
+<div class="container" style="padding: 16px">
+  <h2>Dashboard</h2>
+  <p><strong>Current Balance:</strong> ₹{{ balance }}</p>
+
+  <mat-form-field appearance="fill" style="width: 100%; margin-top: 16px;">
+    <mat-label>Recipient Email</mat-label>
+    <input matInput [(ngModel)]="recipientEmail" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Amount</mat-label>
+    <input matInput type="number" [(ngModel)]="transferAmount" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="transferFunds()">Transfer</button>
+
+  <h3 style="margin-top: 24px;">Transaction History</h3>
+  <mat-list>
+    <mat-list-item *ngFor="let tx of transactions">
+      {{ tx.date | date:'short' }} — ₹{{ tx.amount }} to {{ tx.to || 'N/A' }} ({{ tx.type }})
+    </mat-list-item>
+  </mat-list>
+</div>
